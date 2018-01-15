@@ -1,6 +1,7 @@
 /**
  * History:
  *
+ * 2 (2018-01-15) - Removed unnecesary loop in sendSms() method.
  * 1 (2018-01-12) - Initial release.
  */
 package pl.waw.medynski.smslabs;
@@ -36,7 +37,7 @@ import java.util.stream.Stream;
  * SMSLabs class.
  *
  * @author Maciej Medyński
- * @version 1
+ * @version 2
  */
 public class SMSLabs
 {
@@ -224,12 +225,12 @@ public class SMSLabs
      * @param message
      * @param phoneNumbers
      * @return 
+     * @since 1
+     * @version 2
      */
     public String sendSms(final String senderId, final String message, final String ... phoneNumbers)
     {
-        this.clear().setSenderId(senderId).setMessage(message);
-        Stream.of(phoneNumbers).forEach(this::addPhoneNumber);
-        return this.sendSms();
+        return this.clear().setSenderId(senderId).setMessage(message).addPhoneNumber(phoneNumbers).sendSms();
     }
     
     
